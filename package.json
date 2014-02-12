@@ -1,0 +1,11 @@
+{
+  "name": "yose-lvl1",
+  "version": "0.0.0",
+  "description": "This example app is so cool.",
+  "main": "app",
+  "author": "Benjamin Dreux ",
+  "license": "MIT",
+  "engines": {
+    "node": "0.10.x"
+  }
+}
