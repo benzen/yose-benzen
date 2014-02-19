@@ -2,7 +2,29 @@ http = require('http');
 http.createServer(function(req,res){
 
   if(req.url == '/'){
-    var html = ""+
+
+    res.writeHead(200, {'content-type':'text/html'});
+
+    res.end(htmlIndex);
+  }
+
+  if(req.url == '/ping'){
+    res.writeHead(200, {'content-type':'application/json'});
+    res.end("{\"alive\":true}");
+  }
+
+  if(req.url.indexOf('/primeFactors') === 0 ){
+    res.writeHead(200, {'content-type':'application/json'});
+
+    numberParam = parseInt( extractUrlParam( req.url, 'number' ), 10 )
+    var primes = primeFactors(numberParam);
+    res.end( primes.toString() );
+
+  }
+
+}).listen(process.env.PORT || 5000);
+
+var htmlIndex =
       "<html>"+
         "<body>"+
           "<center>"+
@@ -23,14 +45,25 @@ http.createServer(function(req,res){
 
         "</body>"+
       "</html>";
-    res.writeHead(200, {'content-type':'text/html'});
 
-    res.end(html);
+var extractUrlParam = function(url, param){
+  var index = url.indexOf(param);
+  var startOfParamValue = param.length + index +1;
+  var startOfNextParam = url.indexOf('&', startOfParamValue)
+  if(startOfNextParam === -1){
+    startOfNextParam = url.length
   }
+  return url.substring(startOfParamValue,startOfNextParam)
+}
 
-  if(req.url == '/ping'){
-    res.writeHead(200, {'content-type':'application/json'});
-    res.end("{\"alive\":true}");
-  }
+var primeFactors = function(number){
+ var rest = number ;
+ var factors = [];
+ while(rest>=2){
+   rest = rest/2;
+   factors.push(2);
+ }
+ return factors;
 
-}).listen(process.env.PORT || 5000);
+}
+exports.primeFactors = primeFactors;
