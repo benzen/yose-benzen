@@ -1,4 +1,5 @@
 yose-benzen
 ===========
 
-My party of the game yose
+I'm playing with YoseTheGame.
+Here is my game.
