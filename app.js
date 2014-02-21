@@ -16,20 +16,17 @@ http.createServer(function(req,res){
   if(req.url.indexOf('/primeFactors') === 0 ){
     res.writeHead(200, {'content-type':'application/json'});
 
-    numberParam = parseInt( extractUrlParam( req.url, 'number' ), 10 )
-    var primes,error
+    var urlParam = extractUrlParam( req.url, 'number' )
+    var decomposition =  { "number": urlParam };
+    var numberParam = parseInt( urlParam, 10 );
 
     if(isNaN(numberParam)){
-      error = "not a number";
+      decomposition.error = "not a number";
     }else{
-      primes = primeFactors(numberParam);
+      decomposition.primes = primeFactors(numberParam);
     }
 
-    var decomposition =  {
-      "number": numberParam,
-      "decomposition":primes,
-      "error":error
-    }
+
     res.end( JSON.stringify(decomposition) );
 
   }
