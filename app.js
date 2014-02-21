@@ -23,7 +23,7 @@ http.createServer(function(req,res){
     if(isNaN(numberParam)){
       decomposition.error = "not a number";
     }else{
-      decomposition.primes = primeFactors(numberParam);
+      decomposition.decomposition = primeFactors(numberParam);
     }
 
 
