@@ -17,10 +17,18 @@ http.createServer(function(req,res){
     res.writeHead(200, {'content-type':'application/json'});
 
     numberParam = parseInt( extractUrlParam( req.url, 'number' ), 10 )
-    var primes = primeFactors(numberParam);
+    var primes,error
+
+    if(isNaN(numberParam)){
+      error = "not a number";
+    }else{
+      primes = primeFactors(numberParam);
+    }
+
     var decomposition =  {
       "number": numberParam,
-      "decomposition":primes
+      "decomposition":primes,
+      "error":error
     }
     res.end( JSON.stringify(decomposition) );
 
