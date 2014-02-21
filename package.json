@@ -9,6 +9,6 @@
     "node": "0.10.x"
   },
   "dependencies":{
-    "jasmine":"*"
+    "jasmine-core":"2.0.0"
   }
 }
