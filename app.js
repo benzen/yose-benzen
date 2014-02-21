@@ -55,14 +55,14 @@ var extractUrlParam = function(url, param){
   }
   return url.substring(startOfParamValue,startOfNextParam)
 }
-exports.primeFactors = function(number){
-  var dec = decomposeInPowerOfTwo(number);
-  var result = {};
-  dec.forEach(function(potentialFactor){
-    result[dec] = ''
-  });
-}
-var decomposeInPowerOfTwo = function(number){
+// exports.primeFactors = function(number){
+//   var dec = decomposeInPowerOfTwo(number);
+//   var result = {};
+//   dec.forEach(function(potentialFactor){
+//     result[dec] = ''
+//   });
+// }
+var primeFactors = function(number){
  var rest = number ;
  var factors = [];
  while(rest>=2){
@@ -71,4 +71,4 @@ var decomposeInPowerOfTwo = function(number){
  }
  return factors;
 }
-exports.decomposeInPowerOfTwo = decomposeInPowerOfTwo
+exports.primeFactors = primeFactors
