@@ -18,7 +18,11 @@ http.createServer(function(req,res){
 
     numberParam = parseInt( extractUrlParam( req.url, 'number' ), 10 )
     var primes = primeFactors(numberParam);
-    res.end( primes.toString() );
+    var decomposition =  {
+      "number": numberParam,
+      "decomposition":primes
+    }
+    res.end( JSON.stringify(decomposition) );
 
   }
 
