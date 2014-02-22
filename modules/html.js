@@ -21,17 +21,30 @@ var htmlIndex =
       </html>";
 exports.homepage = htmlIndex;
 var primeHtml= "\
-<html>\
-\
-  <h1 id='title'>Welcome in prime factor form</h1>\
-  <h3 id='invitation'>Choose a number an press go to get the primes for this number</h3>\
-\
-  <form method='GET' action='/primeFactors'>\
-    <input id='number' name='number'>\
-\
-    <button id='go'>Go</button>\
-\
-  </form>\
-</html>\
+<html>\n\
+\n\
+  <head>\n\
+    <script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>\n\
+    <script>\n\
+      var getResults = function(){\n\
+        $.ajax({\n\
+          url:'/primeFactors',\n\
+          data: {number:$('#number').val()}\n\
+        }).done(function(data){\n\
+          $(document.body).append('<div id=\"result\">'+JSON.stringify(data)+'<\\div>');\n\
+        });\n\
+      };\n\
+    </script>\n\
+  </head>\n\
+  <h1 id='title'>Welcome in prime factor form</h1>\n\
+  <h3 id='invitation'>Choose a number an press go to get the primes for this number</h3>\n\
+\n\
+\n\
+    <input id='number' name='number'>\n\
+\n\
+    <button id='go' onClick='getResults()'>Go</button>\n\
+\n\
+\n\
+</html>\n\
 ";
 exports.prime = primeHtml;
