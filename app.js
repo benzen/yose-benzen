@@ -23,8 +23,8 @@ http.createServer(function(req,res){
     var values = helpers.extractUrlParam( req.url, 'number' )
     var result = [];
     values.forEach(function(value){
-      var decomposition =  { "number": urlParam };
-      var numberParam = parseInt( urlParam, 10 );
+      var decomposition =  { "number": value };
+      var numberParam = parseInt( value, 10 );
 
       if(isNaN(numberParam)){
         decomposition.error = "not a number";
@@ -33,9 +33,9 @@ http.createServer(function(req,res){
       }else{
         decomposition.decomposition = primeFactors.primeFactors(numberParam);
 
-      });
-    res.push(decomposition)
-    }
+      }
+    result.push(decomposition)
+    });
 
 
     res.end( JSON.stringify(result) );
