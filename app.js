@@ -1,5 +1,5 @@
 var http = require('http');
-var homepage =  require('./modules/homepage');
+var html =  require('./modules/html');
 var helpers = require('./modules/helpers');
 var primeFactors = require('./modules/primeFactors');
 
@@ -9,15 +9,17 @@ http.createServer(function(req,res){
 
     res.writeHead(200, {'content-type':'text/html'});
 
-    res.end(homepage);
+    res.end(html.homepage);
   }
 
-  if(req.url == '/ping'){
+  else if(req.url == '/ping'){
     res.writeHead(200, {'content-type':'application/json'});
     res.end("{\"alive\":true}");
   }
+  else if(req.url == '/primeFactors/ui'){
 
-  if(req.url.indexOf('/primeFactors') === 0 ){
+  }
+  else if(req.url.indexOf('/primeFactors') === 0 ){
     res.writeHead(200, {'content-type':'application/json'});
 
     var values = helpers.extractUrlParam( req.url, 'number' )
