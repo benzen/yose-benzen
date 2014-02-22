@@ -14,3 +14,23 @@ var primeFactors = function(number){
  return factors;
 }
 exports.primeFactors = primeFactors;
+
+var jsonisifyPrimes = function(value){
+  var decomposition =  { "number": value };
+  var numberParam = parseInt( value, 10 );
+
+  if(numberParam.toString() != value ){
+    numberParam = NaN;
+  }
+  if(isNaN(numberParam)){
+    decomposition.error = "not a number";
+  }else if( numberParam > 1000000){
+    decomposition.error = "too big number (>1e6)";
+  }else if(numberParam < 1){
+    decomposition.error = numberParam + ' is not an integer > 1';
+  }else{
+    decomposition.decomposition = primeFactors(numberParam);
+  }
+  return decomposition;
+};
+exports.jsonisifyPrimes = jsonisifyPrimes;

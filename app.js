@@ -27,7 +27,7 @@ http.createServer(function(req,res){
     var result;
     result = [];
     values.forEach(function(value){
-      var decomposition = jsonisifyPrimes(value);
+      var decomposition = primeFactors.jsonisifyPrimes(value);
       result.push(decomposition)
     });
 
@@ -41,20 +41,3 @@ http.createServer(function(req,res){
 }).listen(process.env.PORT || 5000);
 
 
-var jsonisifyPrimes = function(value){
-  var decomposition =  { "number": value };
-  var numberParam = parseInt( value, 10 );
-
-  if(numberParam.toString() != value ){
-    numberParam = NaN;
-  }
-
-  if(isNaN(numberParam)){
-    decomposition.error = "not a number";
-  }else if( numberParam > 1000000){
-    decomposition.error = "too big number (>1e6)";
-  }else{
-    decomposition.decomposition = primeFactors.primeFactors(numberParam);
-  }
-  return decomposition;
-};
