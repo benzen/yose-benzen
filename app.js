@@ -26,6 +26,8 @@ http.createServer(function(req,res){
 
     if(isNaN(numberParam)){
       decomposition.error = "not a number";
+    }if( numberParam > 1000000){
+      decomposition.error = "too big number (>1e6)";
     }else{
       decomposition.decomposition = primeFactors.primeFactors(numberParam);
     }
