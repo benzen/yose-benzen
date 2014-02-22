@@ -17,7 +17,8 @@ http.createServer(function(req,res){
     res.end("{\"alive\":true}");
   }
   else if(req.url == '/primeFactors/ui'){
-
+    res.writeHead(200, {'content-type':'text/html'});
+    res.end(html.prime);
   }
   else if(req.url.indexOf('/primeFactors') === 0 ){
     res.writeHead(200, {'content-type':'application/json'});

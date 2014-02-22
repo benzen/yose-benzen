@@ -19,4 +19,19 @@ var htmlIndex =
 \
         </body>\
       </html>";
-exports.homepage = htmlIndex
+exports.homepage = htmlIndex;
+var primeHtml= "\
+<html>\
+\
+  <h1 id='title'>Welcome in prime factor form</h1>\
+  <h3 id='invitation'>Choose a number an press go to get the primes for this number</h3>\
+\
+  <form method='GET' action='/primeFactors'>\
+    <input id='number' name='number'>\
+\
+    <button id='go'>Go</button>\
+\
+  </form>\
+</html>\
+";
+exports.prime = primeHtml;
