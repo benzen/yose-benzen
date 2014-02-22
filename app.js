@@ -20,20 +20,25 @@ http.createServer(function(req,res){
   if(req.url.indexOf('/primeFactors') === 0 ){
     res.writeHead(200, {'content-type':'application/json'});
 
-    var urlParam = helpers.extractUrlParam( req.url, 'number' )
-    var decomposition =  { "number": urlParam };
-    var numberParam = parseInt( urlParam, 10 );
+    var values = helpers.extractUrlParam( req.url, 'number' )
+    var result = [];
+    values.forEach(function(value){
+      var decomposition =  { "number": urlParam };
+      var numberParam = parseInt( urlParam, 10 );
 
-    if(isNaN(numberParam)){
-      decomposition.error = "not a number";
-    }else if( numberParam > 1000000){
-      decomposition.error = "too big number (>1e6)";
-    }else{
-      decomposition.decomposition = primeFactors.primeFactors(numberParam);
+      if(isNaN(numberParam)){
+        decomposition.error = "not a number";
+      }else if( numberParam > 1000000){
+        decomposition.error = "too big number (>1e6)";
+      }else{
+        decomposition.decomposition = primeFactors.primeFactors(numberParam);
+
+      });
+    res.push(decomposition)
     }
 
 
-    res.end( JSON.stringify(decomposition) );
+    res.end( JSON.stringify(result) );
 
   }
 
