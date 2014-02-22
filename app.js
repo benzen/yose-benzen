@@ -45,6 +45,10 @@ var jsonisifyPrimes = function(value){
   var decomposition =  { "number": value };
   var numberParam = parseInt( value, 10 );
 
+  if(numberParam.toString() != value ){
+    numberParam = NaN;
+  }
+
   if(isNaN(numberParam)){
     decomposition.error = "not a number";
   }else if( numberParam > 1000000){

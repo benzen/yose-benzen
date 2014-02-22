@@ -36,6 +36,9 @@ var primeHtml= "\
             str = data.number+' = '+ data.decomposition.join(' x ');\n\
           }else if(data.error) {\n\
             str = data.error;\n\
+            if(str=='not a number'){\n\
+              str = data.number+' is '+str\n\
+            }\n\
           }\n\
           $(document.body).append('<div id=\"result\">'+str+'<\\div>');\n\
         });\n\
