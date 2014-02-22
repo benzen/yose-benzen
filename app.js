@@ -21,23 +21,16 @@ http.createServer(function(req,res){
     res.writeHead(200, {'content-type':'application/json'});
 
     var values = helpers.extractUrlParam( req.url, 'number' )
-    var result = [];
+    var result;
+    result = [];
     values.forEach(function(value){
-      var decomposition =  { "number": value };
-      var numberParam = parseInt( value, 10 );
-
-      if(isNaN(numberParam)){
-        decomposition.error = "not a number";
-      }else if( numberParam > 1000000){
-        decomposition.error = "too big number (>1e6)";
-      }else{
-        decomposition.decomposition = primeFactors.primeFactors(numberParam);
-
-      }
-    result.push(decomposition)
+      var decomposition = jsonisifyPrimes(values);
+      result.push(decomposition)
     });
 
-
+    if(values.length == 1){
+      result = result.pop()
+    }
     res.end( JSON.stringify(result) );
 
   }
@@ -45,3 +38,16 @@ http.createServer(function(req,res){
 }).listen(process.env.PORT || 5000);
 
 
+var jsonisifyPrimes = function(value){
+  var decomposition =  { "number": value };
+  var numberParam = parseInt( value, 10 );
+
+  if(isNaN(numberParam)){
+    decomposition.error = "not a number";
+  }else if( numberParam > 1000000){
+    decomposition.error = "too big number (>1e6)";
+  }else{
+    decomposition.decomposition = primeFactors.primeFactors(numberParam);
+  }
+  return decomposition;
+};
