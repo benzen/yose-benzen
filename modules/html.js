@@ -31,7 +31,12 @@ var primeHtml= "\
           url:'/primeFactors',\n\
           data: {number:$('#number').val()}\n\
         }).done(function(data){\n\
-          var str = data.number+' = '+ data.decomposition.join(' x ');\
+          var str = '';\n\
+          if(data.decomposition){\n\
+            str = data.number+' = '+ data.decomposition.join(' x ');\n\
+          }else if(data.error) {\n\
+            str = data.error;\n\
+          }\n\
           $(document.body).append('<div id=\"result\">'+str+'<\\div>');\n\
         });\n\
       };\n\
