@@ -24,7 +24,7 @@ http.createServer(function(req,res){
     var result;
     result = [];
     values.forEach(function(value){
-      var decomposition = jsonisifyPrimes(values);
+      var decomposition = jsonisifyPrimes(value);
       result.push(decomposition)
     });
 
