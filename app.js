@@ -1,7 +1,7 @@
 var http = require('http');
-var homepage =  require('.modules/homepage');
-var helpers = require('.modules/helpers');
-var primeFactors = require('.modules/primeFactors');
+var homepage =  require('./modules/homepage');
+var helpers = require('./modules/helpers');
+var primeFactors = require('./modules/primeFactors');
 
 http.createServer(function(req,res){
 
