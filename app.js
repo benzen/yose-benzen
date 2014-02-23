@@ -23,7 +23,8 @@ http.createServer(function(req,res){
   else if(req.url.indexOf('/primeFactors') === 0 ){
     res.writeHead(200, {'content-type':'application/json'});
 
-    var values = helpers.extractUrlParam( req.url, 'number' )
+    var url = decodeURIComponent(req.url);
+    var values = helpers.extractUrlParam( url, 'number' )
     var result;
     result = [];
     values.forEach(function(value){

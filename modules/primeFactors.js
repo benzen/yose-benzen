@@ -19,6 +19,7 @@ var jsonisifyPrimes = function(value){
   var decomposition =  { "number": value };
   var numberParam = parseInt( value, 10 );
 
+  //it start with a number
   if(numberParam.toString() != value ){
     numberParam = NaN;
   }

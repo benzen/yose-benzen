@@ -26,12 +26,8 @@ var primeHtml= "\
   <head>\n\
     <script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>\n\
     <script>\n\
-      var getResults = function(){\n\
-        $.ajax({\n\
-          url:'/primeFactors',\n\
-          data: {number:$('#number').val()}\n\
-        }).done(function(data){\n\
-          var str = '';\n\
+      var mashall = function(data){\n\
+        var str = '';\n\
           if(data.decomposition){\n\
             str = data.number+' = '+ data.decomposition.join(' x ');\n\
           }else if(data.error) {\n\
@@ -40,7 +36,23 @@ var primeHtml= "\
               str = data.number+' is '+str\n\
             }\n\
           }\n\
-          $(document.body).append('<div id=\"result\">'+str+'<\\div>');\n\
+          return str;\n\
+      }\n\
+      var getResults = function(){\n\
+        $.ajax({\n\
+          url:'/primeFactors',\n\
+          data: {number:$('#number').val()}\n\
+        }).done(function(data){\n\
+          if(data instanceof Array){\n\
+            $(document.body).append('<ol id=\"results\"><\\ol>');\n\
+            data.forEach(function(decomposition){\n\
+              var str = '<li>'+mashall(decomposition);+'</li>'\n\
+              $('ol#results').append('<div id=\"result\">'+str+'<\\div>');\n\
+            });\n\
+          }else{\n\
+            var str = mashall(data);\n\
+            $('old#results').append('<div id=\"result\">'+str+'<\\div>');\n\
+          }\n\
         });\n\
       };\n\
     </script>\n\

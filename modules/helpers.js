@@ -4,8 +4,10 @@ var extractUrlParam = function(url, param){
   while(nextStart>=0){
     var res = extractUrlParam_sub(url,param,nextStart);
     nextStart = res.nextStart;
-    values.push(res.value);
-
+    var splitted = splitOnComma(res.value);
+    splitted.forEach(function(value){
+      values.push( value );
+    });
   }
   return values
 }
@@ -22,3 +24,11 @@ var extractUrlParam_sub = function(url, param, startIndex){
   }
 }
 exports.extractUrlParam = extractUrlParam;
+
+var splitOnComma = function(paramValue){
+  if(paramValue.indexOf(',')==-1){
+    return [paramValue];
+  }
+
+  return paramValue.split(',').map(function(each){return each.trim()});
+};
